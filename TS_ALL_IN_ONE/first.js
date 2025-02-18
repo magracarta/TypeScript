@@ -7,6 +7,7 @@
 // // const f: symbol = Symbol.for('abc'); //es2015 문법
 // // // const g: bigint = 10000000n; //es2020 문법
 // // const h: any = true; //모든 타입이 된다. (자바스크립트와 동일) -> 타입스크립트의 목적은 any를 없에는 것이다.
+Object.defineProperty(exports, "__esModule", { value: true });
 // // const tr: true = true;
 // // const five: 5 = 5;
 // // //자스크립트에서 변수 메개변수 리턴값에 타입을 붙여 넣은게 타입스크립트이다.
@@ -168,3 +169,39 @@
 // function a():void {
 // }
 //하지만 interface안의 메소드에 return 값을 void로 넣었을 때는 왜 return 값을 다른 타입으로 삽입해도 괜찮은 가?
+// declare function forEach(arr: number[], callback:(el: number)=>void ):void;
+// let target : number[]=[];
+// forEach([1,2,3], el=>target.push(el));
+// forEach([1,2,3], el=>{target.push(el)});
+//push는 리턴 값이 number이다 하지만 callback함수에 undefined가 있기 때문에 forEach의 두번 째 인자값에 push값으로 return 하게 되면 결국엔 타입에러가 뜨게 된다.
+//하지만 void로 할경우 오류가 나지 않는다. -> 매게변수에서 사용되는 void는 실제 리턴값이 뭔지 사용하지 않겠다는 의미이다.
+// interface A  {
+//     talk : ()=> void;
+// }
+// const a :A ={
+//     talk(){return 3;}
+// }
+// const b = a.talk();
+//위는 A의 메서드 talk는 void여서 아래 타입으로 들어가는 변수에 talk에 3이 return으로 넣어도 b에서 사용된 메서드 return값에선 오류가 나게된다.
+// void 이기 때문에 값을 무시하기 때문
+//declare은 타입스크립트에서 "이 함수나 변수가 이미 다른 곳에서 정의되어 있다는 것을 알려주는 키워드"이다. 주로 타입 선언 파일에서 사용되며, 실제로 구현된 코드가 아닌 타입 정보만 제공하는 역할을 한다.
+// class A {
+//     aaa(){}
+//    }
+//    class B {
+//     bbb(){}
+//    }
+//    function aOrB(param: A|B){
+//        if(param instanceof A){
+//            param.aaa();
+//        }
+//    }
+//    aOrB(new A());
+//    aOrB(new B());
+// interface Cat { meow: number }
+// interface Dog { bow: number }
+// // 타입 판별을 직접 만든다.
+// function catOrDog(a: Cat | Dog ): a is Dog {
+//     if((a as Cat).meow) return false;
+//     return true;
+// }

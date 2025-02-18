@@ -284,3 +284,102 @@
 
 
 //declare은 타입스크립트에서 "이 함수나 변수가 이미 다른 곳에서 정의되어 있다는 것을 알려주는 키워드"이다. 주로 타입 선언 파일에서 사용되며, 실제로 구현된 코드가 아닌 타입 정보만 제공하는 역할을 한다.
+
+
+// class A {
+//     aaa(){}
+//    }
+   
+//    class B {
+//     bbb(){}
+//    }
+   
+//    function aOrB(param: A|B){
+//        if(param instanceof A){
+//            param.aaa();
+//        }
+//    }
+   
+//    aOrB(new A());
+//    aOrB(new B());
+
+
+// interface Cat { meow: number }
+// interface Dog { bow: number }
+
+
+// // 타입 판별을 직접 만든다.
+// function catOrDog(a: Cat | Dog ): a is Dog {
+//     if((a as Cat).meow) return false;
+//     return true;
+// }
+
+
+
+// const isRejected = (input: PromiseSettledResult<unknown>): input is PromiseRejectedResult =>{
+//     return input.status === 'rejected'
+// }
+// const isFulfilled = <T>(input: PromiseSettledResult<T>): input is PromiseFulfilledResult<T> =>{
+//     return input.status === 'fulfilled'
+// }
+
+// const promises = await Promise.allSettled([Promise.resolve('a'), Promise.resolve('b')]);
+// const erros = promises.filter(isRejected);
+// export {};
+
+/*
+const x : {} = 'hello';
+const y: Object = 'hi'; // {}, Object는 모든 타입
+
+const xx : object = {hello:'world'} //object 지양, interface, type, class 사용
+const z: unknown = 'hi';
+
+//unknown = {} | null | undefined
+if(z){
+    z
+}else{
+    z;
+}
+
+type B = 'Human' | 'Mammal' | 'Animal'; // interfasce에서는 | 이 안됨.
+type A = {[key in B] : B};
+const aaa: A = { Human: 'Animal', Mammal:"Human", Animal:"Mammal"};
+class A {
+    private a:string;
+    protected b:number;
+    constructor(a: string, b:number = 123){
+        this.a =a;
+        this.b =b;
+    }
+
+    method(){
+        console.log(this.a, this.b);
+    }
+}
+
+
+type AA = A;
+const a: A = new A("123");
+const b: typeof A = A;
+
+//                  public         protected           private
+// 클래스내부         O                O                   O
+// 인스턴스           O                X                   X
+// 상속 클래스        O                O                   X
+
+
+function abc(a: number , b?:number, c?:number){}
+
+abc(1);
+abc(1,2);
+abc(1,2,3);
+
+
+
+let obj : {a: string, b?: string} = {a:'hello', b:'world'};
+
+obj = {a : 'hello'};
+
+
+
+*/

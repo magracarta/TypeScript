@@ -1,16 +1,11 @@
-class A {
- aaa(){}
+//generic
+
+
+function add<T extends number | string , K extends string >(x: T, y: K){
+    return x+y;
 }
 
-class B {
- bbb(){}
-}
+// add(1,2);
+add("1","2");
 
-function aOrB(param: A|B){
-    if(param instanceof A){
-        param.aaa();
-    }
-}
 
-aOrB(new A());
-aOrB(new B());
